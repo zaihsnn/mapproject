@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <!--About-->
+    <div class="container">
+        <img src="https://4.bp.blogspot.com/-ADZhF-_WUU8/WRU-58j27gI/AAAAAAAAZSA/CkVVEyXkcYccovnci6k8y5XZ3yQgly-ewCLcB/s1600/ikan2.jpg" style="float: left; margin: 0 50px 50px 0; width: 450px;">
+        <h1 style="margin-left: 850px;">Tentang</h1><br>
+        <p style="text-align: center; font-size: 20px;">Memberikan informasi tentang lokasi persebaran Tempat Pelelangan Ikan di Jakarta serta jam buka-tutupnya Tempat Pelelangan Ikan tersebut.</p>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+    <!--End About-->
+
+    <!--Map-->
+    <div class="container">
+        <h1 style="text-align: center;">Lokasi Persebaran TPI di Jakarta</h1><br>
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                {{ m|safe }}
+            </div>
+        </div>
+    </div><br><br><br>
+    <!--End Map-->
+
+    <!--Tabel-->
+    <h1>Daftar TPI di Jakarta</h1>
+    <table class="table">
+        <thead style="font-size: 20px; text-align: center;">
+            <tr>
+                <th scope="col">NO.</th>
+                <th scope="col">NAMA</th>
+                <th scope="col">ALAMAT</th>
+                <th scope="col">BUKA</th>
+                <th scope="col">FOTO TPI</th>
+                <th scope="col">AKSI</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: 16px;">
+            {% for fish in ikan %}
+                <tr>
+                    <td>{{ fish.nomer }}</td>
+                    <td><strong>{{ fish.nama }}</strong></td>
+                    <td>{{ fish.alamat }}</td>
+                    <td><strong>{{ fish.jam_buka }}</strong></td>
+                    <td><img src=" {% static fish.gambar %}" width="400" height="275" alt=""></td>
+                    <td>
+                        <a href="{% url 'lihat_detail' fish.id %}" class="btn btn-sm btn-primary">Lihat</a> |
+                        <a href="{% url 'update_tpi' fish.id %}" class="btn btn-sm btn-warning">Ubah</a> |
+                        <a href="#" class="btn btn-sm btn-danger" onclick="hapus_tpi('{{ fish.id }}' ,'{{ fish.nama }}')">Hapus</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><br><br>
+    <!--End Tabel-->
+
+    <script>
+        function hapus_tpi(id_fish, nama){
+            swal({
+                title: "Apakah Anda Yakin?",
+                text: "Setelah data "+ nama +" dihapus, data tidak dapat dikembalikan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Berhasil!", "Data "+ nama +" berhasil dihapus!", "success").then(function(){
+                        window.location = "/fish/delete_tpi/"+id_fish;
+                    });
+                }
+            });
+        }
+    </script>
+
+{% endblock %}

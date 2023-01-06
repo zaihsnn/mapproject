@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-5">
+                <img src="{% static fish.gambar %}" class="card-img-top h-100" alt="...">
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h2 class="card-title">{{ fish.nama }}</h2><br>
+                    <p class="card-text" style="font-size: 17px;">{{ fish.alamat }} </p>
+                    <p class="card-text" style="font-size: 17px;">Buka = {{ fish.jam_buka }} </p>
+                    <a href="/tpi" class="btn btn-danger">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </div><br><br><br><br>
+
+{% endblock %}

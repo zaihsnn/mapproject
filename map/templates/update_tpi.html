@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <h1>Ubah Data TPI</h1><br><br>
+    <div class="row">
+        <div class="col-md-4">
+            {% if pesan %}
+            <script>
+                swal("Berhasil!", "{{ pesan }}", "success");
+            </script>
+            {% endif %}
+
+            <form action="{% url 'update_tpi' fish.id %}" method="post" style="font-size: 15px; text-align: left;">
+                {% csrf_token %}
+                {{ form.as_p}}
+        
+                <input type="submit" value="Simpan" class="btn btn-primary">
+                <a href="/tpi" class="btn btn-danger">Kembali</a>
+        
+            </form>
+
+        </div>
+    </div><br><br><br>
+
+
+{% endblock %}
