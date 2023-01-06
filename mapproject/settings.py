@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure--tl%s5csvp3e#d#+p*xw=0#ub5x19wv(e&k10byfp^^jeo3sw5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -130,3 +130,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'tpi'
 
 LOGIN_URL = 'masuk'
+
+#Static work
+import os
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
